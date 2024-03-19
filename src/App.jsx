@@ -6,11 +6,14 @@ function App() {
   const slides = [
     "https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?cs=srgb&dl=pexels-stephan-seeber-1054218.jpg&fm=jpg",
     "https://c4.wallpaperflare.com/wallpaper/798/616/951/macos-sierra-wallpaper-preview.jpg",
-    "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8NGslMjBtb3VudGFpbnxlbnwwfHwwfHx8MA%3D%3D"
+    "https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg"
   ];
 
   const leftFun = () => {
-    if (index > 0) {
+    if (index == 0) {
+      setIndex(slides.length - 1);
+    }
+    else {
       setIndex(index - 1);
     }
   };
@@ -19,19 +22,29 @@ function App() {
     if (index < slides.length - 1) {
       setIndex(index + 1);
     }
+    else {
+      setIndex(0);
+    }
   };
 
   return (
     <div className='flex flex-col gap-2 items-center justify-center h-screen'>
-      <div className='flex items-center gap-4'>
-        <button className='text-4xl' onClick={leftFun}>{"<"}</button>
-        <figure className='w-96 h-64 rounded-lg overflow-hidden bg-red-500'>
-          <img className='w-full h-full object-cover' src={slides[index]} alt="image" />
+
+
+      <div className='flex items-center gap-4 relative'>
+        <button className='text-4xl text-white absolute z-10 left-2' onClick={leftFun}>{"<"}</button>
+        <figure className='w-96 h-64 flex overflow-hidden rounded-lg'>
+          {
+            slides.map(slide => (
+              <img className={`w-full h-full object-cover transition-all duration-300 -translate-x-[${index * 100}%]`} src={slide} alt="image" />
+            ))
+          }
         </figure>
-        <button className='text-4xl' onClick={rightFun}>{">"}</button>
+        <button className='text-4xl text-white absolute z-10 right-2' onClick={rightFun}>{">"}</button>
+        <h1 className='text-2xl text-white absolute bottom-0 left-[45%]'>{index + 1 + "/" + slides.length}</h1>
       </div>
 
-      <h1 className='text-2xl'>{index + 1 + "/" + slides.length}</h1>
+
     </div>
   )
 }
