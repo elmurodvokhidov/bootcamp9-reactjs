@@ -1,0 +1,24 @@
+{
+    "todos": [
+        {
+            "id": 1,
+            "title": "Uhlash"
+        },
+        {
+            "id": 2,
+            "title": "Ko'proq uhlash"
+        },
+        {
+            "id": 3,
+            "title": "Uyqudan uyg'onish va yana uhlash"
+        },
+        {
+            "id": 4,
+            "title": "Uyqudan zerikib uhlab qolish"
+        },
+        {
+            "id": 5,
+            "title": "Ko'p uhlab, charchab uhlab qolish"
+        }
+    ]
+}
