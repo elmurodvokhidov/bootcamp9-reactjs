@@ -39,7 +39,13 @@ export default function ContextFunction({ children }) {
     // Yangi ma'lumot hosil qilish
     const handleCreate = async function () {
         try {
-            await axios.post(API_URL + "/todos", newTodo);
+            if (!newTodo.id) {
+                // Ma'lumot qo'shsin
+                await axios.post(API_URL + "/todos", newTodo);
+            } else {
+                // Ma'lumotni tahrirlasin
+                await axios.put(`${API_URL}/todos/${newTodo.id}`, newTodo);
+            }
             setNewTodo({
                 title: ""
             });
