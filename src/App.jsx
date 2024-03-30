@@ -9,6 +9,7 @@ function App() {
     getInputValue,
     handleCreate,
     handleDelete,
+    handleEdit,
   } = useContext(Context);
 
   return (
@@ -37,7 +38,9 @@ function App() {
               <div key={index} className="w-full bg-gray-100 rounded-md flex items-center justify-between p-4">
                 <h1 className="text-xl">{todo.title}</h1>
                 <div className="flex gap-2">
-                  <button className="rounded-md capitalize py-2 px-4 bg-blue-500 text-white">edit</button>
+                  <button
+                    onClick={() => handleEdit(todo)}
+                    className="rounded-md capitalize py-2 px-4 bg-blue-500 text-white">edit</button>
                   <button
                     onClick={() => handleDelete(todo.id)}
                     className="rounded-md capitalize py-2 px-4 bg-blue-500 text-white">delete</button>

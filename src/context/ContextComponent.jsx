@@ -59,6 +59,11 @@ export default function ContextFunction({ children }) {
         }
     };
 
+    // Ma'lumotni tahrirlash funksiyasi
+    function handleEdit(todo) {
+        setNewTodo(todo);
+    };
+
     // Contextdagi barcha funksiyalarni export qilish
     return (
         <Context.Provider value={{
@@ -67,6 +72,7 @@ export default function ContextFunction({ children }) {
             getInputValue,
             handleCreate,
             handleDelete,
+            handleEdit,
         }}>
             {children}
         </Context.Provider>
