@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { Context } from "./context/ContextComponent";
 
 function App() {
+  // Contextdan kerakli funksiyalarni olish
   const {
     todos,
     newTodo,

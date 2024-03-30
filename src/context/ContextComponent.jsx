@@ -1,14 +1,20 @@
 import axios from 'axios';
 import { createContext, useEffect, useState } from 'react'
 
+// Context hosil qilish
 export const Context = createContext();
 
 export default function ContextFunction({ children }) {
+    // API manzil
+    const API_URL = "http://localhost:5000";
+    // Serverdan kelgan ma'lumotlarni saqlovchi state
     const [todos, setTodos] = useState([]);
+    // Inputdan olingan ma'lumotlarni saqlovchi state
     const [newTodo, setNewTodo] = useState({
         title: ""
     });
 
+    // Inputdan ma'lumot olish funksiyasi
     const getInputValue = (e) => {
         setNewTodo({
             ...newTodo,
@@ -16,21 +22,24 @@ export default function ContextFunction({ children }) {
         })
     }
 
+    // Serverdan ma'lumot olish funksiyasi
     function getData() {
-        axios("http://localhost:5000/todos")
+        axios(API_URL + "/todos")
             .then((response) => {
                 setTodos(response.data);
             })
             .catch((error) => console.log(error))
     };
 
+    // Serverdan ma'lumot olinayotganda cheksizlikni to'xtatish
     useEffect(() => {
         getData();
     }, []);
 
+    // Yangi ma'lumot hosil qilish
     const handleCreate = async function () {
         try {
-            await axios.post("http://localhost:5000/todos", newTodo);
+            await axios.post(API_URL + "/todos", newTodo);
             setNewTodo({
                 title: ""
             });
@@ -40,15 +49,17 @@ export default function ContextFunction({ children }) {
         }
     };
 
+    // Mavjud ma'lumotni o'chirib yuborish funksiyasi
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/todos/${id}`);
+            await axios.delete(`${API_URL}/todos/${id}`);
             getData();
         } catch (error) {
             console.log(error);
         }
     };
 
+    // Contextdagi barcha funksiyalarni export qilish
     return (
         <Context.Provider value={{
             todos,
